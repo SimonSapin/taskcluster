@@ -112,8 +112,8 @@ class AwsProvider extends Provider {
 
           UserData: userData.toString('base64'), // The string needs to be base64-encoded. See the docs above
 
-          MaxCount: Math.min(toSpawnCounter, toSpawnPerConfig),
-          MinCount: Math.min(toSpawnCounter, toSpawnPerConfig),
+          MaxCount: Math.min(toSpawnCounter, Math.ceil(toSpawnPerConfig / config.capacityPerInstance)),
+          MinCount: Math.min(toSpawnCounter, Math.ceil(toSpawnPerConfig / config.capacityPerInstance)),
           TagSpecifications: [
             ...otherTagSpecs,
             {
